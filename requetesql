@@ -1,0 +1,24 @@
+REQUETE SQL
+
+Quand vous réalisez une requête faites en sorte pour chaque clause SQL de les écrire les 
+unes en dessous des autres et en MAJUSCULES
+
+
+
+SELECT nom_personnage, id_personnage
+FROM personnage
+WHERE id_lieu = 1
+ORDER BY nom_personnage
+
+
+1. Nom des lieux qui finissent par 'um'.
+
+SELECT nom_lieu
+FROM lieu
+WHERE nom_lieu
+LIKE '%um'
+
+
+2. Nombre de personnages par lieu (trié par nombre de personnages décroissant).
+
+SELECT
