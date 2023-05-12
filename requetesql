@@ -5,6 +5,17 @@ unes en dessous des autres et en MAJUSCULES
 
 
 
+Une requête SQL doit contenir au minimum les éléments suivants :
+
+La clause SELECT : cette clause spécifie les colonnes que vous voulez sélectionner dans votre requête.
+La clause FROM : cette clause spécifie la table à partir de laquelle vous voulez sélectionner les données.
+La clause WHERE : cette clause spécifie les conditions que les données doivent respecter pour être sélectionnées.
+La clause GROUP BY (optionnelle) : cette clause spécifie la façon dont les données doivent être regroupées.
+La clause HAVING (optionnelle) : cette clause spécifie les conditions que les groupes doivent respecter pour être sélectionnés.
+La clause ORDER BY (optionnelle) : cette clause spécifie l'ordre dans lequel les données doivent être triées.
+
+
+
 SELECT nom_personnage, id_personnage
 FROM personnage
 WHERE id_lieu = 1
@@ -20,5 +31,5 @@ LIKE '%um'
 
 
 2. Nombre de personnages par lieu (trié par nombre de personnages décroissant).
-
+faire INNER JOIN pour croiser les donnees lieu 
 SELECT
