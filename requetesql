@@ -253,3 +253,17 @@ VALUES ('Champdeblix', 'ferme Hantassion', 6 , 12);
 
 
 
+B. Autorisez Bonemine à boire de la potion magique, elle est jalouse d'Iélosubmarine...
+
+DELETE FROM autoriser_boire
+-- DELETE FROM sert à supprimer l'enregistrement de la table autoriser_boire
+WHERE id_personnage = (
+	SELECT id_personnage 
+	FROM personnage 
+	WHERE LOWER(nom_personnage)
+	LIKE 'Bonemine')
+  -- Filtre sur l'ID de Bonemine
+AND id_potion = 1;
+-- Filtre sur l'ID de la potion magique
+
+
