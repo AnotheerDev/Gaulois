@@ -181,3 +181,18 @@ GROUP BY type_casque.id_type_casque, type_casque.nom_type_casque
 -- Regroupe les résultats par le ID du type de casque et le nom du type de casque
 ORDER BY nombre_de_casques DESC;
 -- Trie les résultats par ordre décroissant du nomùbre de casque par type
+
+
+
+12. Nom des potions dont un des ingrédients est le poisson frais.
+
+SELECT nom_potion
+-- Sélectionne le nom de la ou des potion(s)
+FROM potion
+INNER JOIN composer ON potion.id_potion = composer.id_potion
+-- Effectue une jointure avec la table composer
+INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
+-- Effectue une jointure avec la table ingredient
+WHERE LOWER(ingredient.nom_ingredient)
+LIKE 'poisson frais'
+-- Filtre pour obtenir le nom de la potion qui contient poisson frais ATTENTION pour éviter la casse toujours mettre un LOWER() et un LIKE plutôt qu'un "=" quand on fait ce type de recherche on met en minuscule aussi pour éviter qu'une majuscule empêche de trouver l'élément en bdd
