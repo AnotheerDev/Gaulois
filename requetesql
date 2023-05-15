@@ -110,21 +110,33 @@ ORDER BY cout_realisation DESC;
 7. Nom des ingrédients + coût + quantité de chaque ingrédient qui composent la potion 'Santé'.
 
 SELECT ingredient.nom_ingredient, ingredient.cout_ingredient, composer.qte
---Sélectionne les ingrédients, le cout des ingrédients et la quantité
+-- Sélectionne les ingrédients, le cout des ingrédients et la quantité
 FROM potion
---Sélectionne depuis la table "potion"
+-- Sélectionne depuis la table "potion"
 INNER JOIN composer ON potion.id_potion = composer.id_potion
---Effectue une jointure avec la table "composer" pour associer les ingrédients à la potion
+-- Effectue une jointure avec la table "composer" pour associer les ingrédients à la potion
 INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
---Effectue une jointure avec la table "ingredient" pour obtenir les détails de chaque ingrédient
+-- Effectue une jointure avec la table "ingredient" pour obtenir les détails de chaque ingrédient
 WHERE potion.nom_potion = 'Santé';
---Filtrage des résultats pour la potion 'Santé'
+-- Filtrage des résultats pour la potion 'Santé'
 
 
 
+8. Nom du ou des personnages qui ont pris le plus de casques dans la bataille 'Bataille du village gaulois'.
 
-
-
+SELECT personnage.nom_personnage, SUM(prendre_casque.qte) AS nombre_de_casques
+-- Sélectionne le nom du personnage et la somme des casques pris
+FROM personnage
+INNER JOIN prendre_casque ON personnage.id_personnage = prendre_casque.id_personnage
+INNER JOIN casque ON prendre_casque.id_casque = casque.id_casque
+INNER JOIN bataille ON prendre_casque.id_bataille = bataille.id_bataille
+-- Jointure des tables pour lier les informations
+WHERE bataille.nom_bataille = 'Bataille du village gaulois'
+-- Filtre pour obtenir seulement les informations de la "Bataille du village gaulois"
+GROUP BY personnage.id_personnage
+-- Regroupe les résultats par le ID du personnage
+ORDER BY nombre_de_casques DESC
+-- Trie les résultats par ordre décroissant du nombre de casques pris
 
 
 
