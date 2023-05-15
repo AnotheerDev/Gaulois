@@ -230,4 +230,14 @@ WHERE boire.id_personnage IS NULL;
 
 15. Nom du / des personnages qui n'ont pas le droit de boire de la potion 'Magique'.
 
-
+SELECT nom_personnage
+-- Sélectionne le nom des personnages
+FROM personnage
+-- Vérifie si le personnage n'a pas de correspondance dans la table autoriser_boire pour la potion 'Magique'
+WHERE id_personnage NOT IN (
+  SELECT id_personnage
+  FROM autoriser_boire
+  INNER JOIN potion ON autoriser_boire.id_potion = potion.id_potion
+  WHERE LOWER(potion.nom_potion)
+  LIKE 'magique'
+);
