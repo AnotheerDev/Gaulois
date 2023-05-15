@@ -107,10 +107,18 @@ ORDER BY cout_realisation DESC;
 
 
 
+7. Nom des ingrédients + coût + quantité de chaque ingrédient qui composent la potion 'Santé'.
 
-
-
-
+SELECT ingredient.nom_ingredient, ingredient.cout_ingredient, composer.qte
+--Sélectionne les ingrédients, le cout des ingrédients et la quantité
+FROM potion
+--Sélectionne depuis la table "potion"
+INNER JOIN composer ON potion.id_potion = composer.id_potion
+--Effectue une jointure avec la table "composer" pour associer les ingrédients à la potion
+INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
+--Effectue une jointure avec la table "ingredient" pour obtenir les détails de chaque ingrédient
+WHERE potion.nom_potion = 'Santé';
+--Filtrage des résultats pour la potion 'Santé'
 
 
 
