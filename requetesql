@@ -48,6 +48,22 @@ ORDER BY Nombre_Personnages DESC;
 
 3. Nom des personnages + spécialité + adresse et lieu d'habitation, triés par lieu puis par nom de personnage.
 
+SELECT personnage.nom_personnage, specialite.nom_specialite, personnage.adresse_personnage, lieu.nom_lieu
+-- Sélectionne le nom du personnage, le nom de la spécialité, l'adresse du personnage et le nom du lieu
+FROM personnage
+-- Sélectionne la table "personnage"
+INNER JOIN lieu ON personnage.id_lieu = lieu.id_lieu
+-- Effectue une jointure interne entre la table "personnage" et la table "lieu" en utilisant l'identifiant du lieu comme clé de jointure
+INNER JOIN specialite ON personnage.id_specialite = specialite.id_specialite
+-- Effectue une jointure interne entre la table "personnage" et la table "specialite" en utilisant l'identifiant de la spécialité comme clé de jointure
+ORDER BY lieu.id_lieu, personnage.nom_personnage;
+-- Trie les résultats par ordre croissant de l'identifiant du lieu, puis par ordre croissant du nom du personnage
+
+
+
+
+4. Nom des spécialités avec nombre de personnages par spécialité (trié par nombre de personnages décroissant)
+
 SELECT specialite.nom_specialite, COUNT(personnage.id_specialite) AS Nombre_Personnages
 -- Sélectionne le nom de la spécialité et compte le nombre de personnages pour chaque spécialité
 FROM specialite
