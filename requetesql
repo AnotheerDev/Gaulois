@@ -167,3 +167,17 @@ ORDER BY nombre_de_casques DESC
 -- Trie les résultats par ordre décroissant des casques pris lors de la bataille
 LIMIT 1;
 -- Garde que le premier resultat 
+
+
+
+11. Combien existe-t-il de casques de chaque type et quel est leur coût total ? (classés par nombre décroissant).
+
+SELECT type_casque.nom_type_casque, COUNT(casque.id_casque) AS nombre_de_casques, SUM(casque.cout_casque) AS cout_total
+-- Sélectionne le nom du type de casque, le compte du nombre de casque et le cout total des casques du même type
+FROM type_casque
+INNER JOIN casque ON type_casque.id_type_casque = casque.id_type_casque
+-- Effectue une jointure avec la table "casque"
+GROUP BY type_casque.id_type_casque, type_casque.nom_type_casque
+-- Regroupe les résultats par le ID du type de casque et le nom du type de casque
+ORDER BY nombre_de_casques DESC;
+-- Trie les résultats par ordre décroissant du nomùbre de casque par type
