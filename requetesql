@@ -87,3 +87,43 @@ INNER JOIN lieu ON bataille.id_lieu = lieu.id_lieu
 -- Effectue une jointure interne (INNER JOIN) entre les tables "bataille" et "lieu" en utilisant la colonne "id_lieu" comme condition de correspondance entre les deux tables
 ORDER BY date_bataille DESC;
 -- Trie les résultats par ordre décroissant de la date de la bataille
+
+
+
+6. Nom des potions + coût de réalisation de la potion (trié par coût décroissant)
+
+SELECT potion.nom_potion, SUM(ingredient.cout_ingredient * composer.qte) AS cout_realisation
+-- Sélectionne le nom de la potion et calcule le coût de réalisation total
+FROM potion
+-- Sélectionne depuis la table "potion"
+INNER JOIN composer ON potion.id_potion = composer.id_potion
+-- Effectue une jointure avec la table "composer" en utilisant l'identifiant de la potion comme clé de jointure
+INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
+-- Effectue une jointure avec la table "ingredient" en utilisant l'identifiant de l'ingrédient comme clé de jointure
+GROUP BY potion.id_potion 
+-- Groupe les résultats par l'identifiant de la potion
+ORDER BY cout_realisation DESC; 
+-- Trie les résultats par le coût de réalisation décroissant
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
