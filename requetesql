@@ -43,3 +43,18 @@ GROUP BY lieu.id_lieu, lieu.nom_lieu
 -- Groupe les résultats par l'identifiant du lieu et le nom du lieu
 ORDER BY Nombre_Personnages DESC;
 -- Trie les résultats par ordre décroissant du nombre de personnages
+
+
+
+3. Nom des personnages + spécialité + adresse et lieu d'habitation, triés par lieu puis par nom de personnage.
+
+SELECT specialite.nom_specialite, COUNT(personnage.id_specialite) AS Nombre_Personnages
+-- Sélectionne le nom de la spécialité et compte le nombre de personnages pour chaque spécialité
+FROM specialite
+-- Sélectionne la table "specialite"
+INNER JOIN personnage ON specialite.id_specialite = personnage.id_specialite
+-- Effectue une jointure interne entre la table "specialite" et la table "personnage" en utilisant l'identifiant de la spécialité comme clé de jointure
+GROUP BY specialite.id_specialite, specialite.nom_specialite
+-- Groupe les résultats par l'identifiant de la spécialité et le nom de la spécialité
+ORDER BY Nombre_Personnages DESC;
+-- Trie les résultats par ordre décroissant du nombre de personnages pour chaque spécialité
