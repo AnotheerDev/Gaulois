@@ -140,9 +140,17 @@ ORDER BY nombre_de_casques DESC
 
 
 
+9. Nom des personnages et leur quantité de potion bue (en les classant du plus grand buveur au plus petit).
 
-
-
+SELECT personnage.nom_personnage, SUM(boire.dose_boire) AS quantite_bue
+-- Sélectionne le nom du personnage la somme des quantitées bues
+FROM personnage
+INNER JOIN boire ON personnage.id_personnage = boire.id_personnage
+-- Effectue une jointure avec la table "boire"
+GROUP BY personnage.id_personnage, personnage.nom_personnage
+-- Regroupe les résultats par le ID du personnage et nom du personnage
+ORDER BY quantite_bue DESC;
+-- Trie les résultats par ordre décroissant des quantitées bues
 
 
 
