@@ -30,6 +30,16 @@ WHERE nom_lieu
 LIKE '%um'
 
 
+
 2. Nombre de personnages par lieu (trié par nombre de personnages décroissant).
-faire INNER JOIN pour croiser les donnees lieu 
-SELECT
+
+SELECT lieu.nom_lieu, COUNT(personnage.id_personnage) AS Nombre_Personnages
+-- Sélectionne le nom du lieu et compte le nombre de personnages dans chaque lieu
+FROM lieu
+-- Sélectionne la table "lieu"
+INNER JOIN personnage ON lieu.id_lieu = personnage.id_lieu
+-- Effectue une jointure interne entre la table "lieu" et la table "personnage" en utilisant l'identifiant du lieu comme clé de jointure
+GROUP BY lieu.id_lieu, lieu.nom_lieu
+-- Groupe les résultats par l'identifiant du lieu et le nom du lieu
+ORDER BY Nombre_Personnages DESC;
+-- Trie les résultats par ordre décroissant du nombre de personnages
