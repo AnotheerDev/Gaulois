@@ -211,3 +211,18 @@ NOT LIKE LOWER('Village gaulois')
 -- Effectue une recherche pour tous les lieux différents de village gaulois
 GROUP BY lieu.nom_lieu
 ORDER BY NombreDePersonnages DESC
+
+
+
+14. Nom des personnages qui n'ont jamais bu aucune potion.
+
+SELECT nom_personnage
+-- Sélectionne le nom du personnage
+FROM personnage 
+INNER JOIN boire ON personnage.id_personnage = boire.id_personnage 
+-- Effectue une jointure avec la table "boire"
+WHERE boire.id_personnage IS NULL; 
+-- Sélectionne les personnages qui n'ont pas de correspondance dans la table boire (n'ont jamais bu de potion)
+-- On utilise LEFT JOIN ici car on veut inclure tous les personnages dans la liste, même ceux qui n'ont pas bu de potion.
+-- On utilise WHERE boire.id_personnage IS NULL ça permet de sélectionner uniquement les personnages qui n'ont pas de correspondance dans la table "boire"
+
