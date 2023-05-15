@@ -241,3 +241,15 @@ WHERE id_personnage NOT IN (
   WHERE LOWER(potion.nom_potion)
   LIKE 'magique'
 );
+
+
+
+A. Ajoutez le personnage suivant : Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus.
+
+INSERT INTO personnage (nom_personnage, adresse_personnage, id_lieu, id_specialite)
+-- Ajoute un nouveau personnage à la table personnage à l'aide de INSERT INTO
+VALUES ('Champdeblix', 'ferme Hantassion', 6 , 12);
+-- Ajoute les valeurs associées colonne par colonnne
+
+
+
