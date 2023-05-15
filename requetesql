@@ -74,3 +74,16 @@ GROUP BY specialite.id_specialite, specialite.nom_specialite
 -- Groupe les résultats par l'identifiant de la spécialité et le nom de la spécialité
 ORDER BY Nombre_Personnages DESC;
 -- Trie les résultats par ordre décroissant du nombre de personnages pour chaque spécialité
+
+
+
+5. Nom, date et lieu des batailles, classées de la plus récente à la plus ancienne (dates affichées au format jj/mm/aaaa).
+
+SELECT nom_bataille, DATE_FORMAT(date_bataille, '%d/%m/%Y') AS date_formattee, nom_lieu
+-- Sélectionne le nom de la bataille, la date formatée et le nom du lieu
+FROM bataille
+-- Spécifie la table "bataille" à partir de laquelle nous récupérons les données
+INNER JOIN lieu ON bataille.id_lieu = lieu.id_lieu
+-- Effectue une jointure interne (INNER JOIN) entre les tables "bataille" et "lieu" en utilisant la colonne "id_lieu" comme condition de correspondance entre les deux tables
+ORDER BY date_bataille DESC;
+-- Trie les résultats par ordre décroissant de la date de la bataille
