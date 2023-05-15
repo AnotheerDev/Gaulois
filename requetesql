@@ -230,17 +230,4 @@ WHERE boire.id_personnage IS NULL;
 
 15. Nom du / des personnages qui n'ont pas le droit de boire de la potion 'Magique'.
 
-SELECT nom_personnage
--- Sélectionne le nom des personnages
-FROM personnage
-WHERE id_personnage NOT IN (
--- Vérifie si l'ID du personnage n'est pas présent dans la sous-requête suivante
-  SELECT id_personnage
-    -- Sélectionne l'ID des personnages qui ont l'autorisation de boire une potion spécifique
-  FROM autoriser_boire
-  INNER JOIN potion ON autoriser_boire.id_potion = potion.id_potion
-    -- Effectue une jointure avec la table "autoriser_boire" et la table "potion"
-  WHERE potion.nom_potion 
-  LIKE LOWER('Magique')
-    -- Filtre les potions ayant un nom correspondant à 'Magique' (ignorant la casse)
-);
+
