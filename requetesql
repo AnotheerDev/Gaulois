@@ -349,5 +349,21 @@ WHERE LOWER(nom_personnage) = 'zérozérosix';
 
 
 
+E. La potion 'Soupe' ne doit plus contenir de persil.
 
+UPDATE composer
+-- Met à jour les enregistrements de la table "composer"
+SET qte = 0
+-- Modifie la quantité de persil à 0
+WHERE id_potion = (
+    SELECT id_potion
+    FROM potion
+    WHERE LOWER(nom_potion) = 'soupe'
+)
+AND id_ingredient = (
+    SELECT id_ingredient
+    FROM ingredient
+    WHERE LOWER(nom_ingredient) = 'persil'
+    -- Filtre sur l'ID de la potion 'Soupe' et l'ID de l'ingrédient 'Persil' (en ignorant la casse)
+);
 
