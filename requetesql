@@ -338,9 +338,14 @@ AND id_casque NOT IN  (
 
 
 
+D. Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate.
 
-
-
+UPDATE personnage
+-- Met à jour les enregistrements de la table "personnage"
+SET adresse_personnage = 'prison de Condate'
+-- Modifie la valeur de la colonne "adresse_personnage" avec la nouvelle adresse
+WHERE LOWER(nom_personnage) = 'zérozérosix';
+-- Filtre sur le nom du personnage "Zérozérosix" (en ignorant la casse)
 
 
 
