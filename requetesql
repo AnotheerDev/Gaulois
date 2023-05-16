@@ -367,3 +367,19 @@ AND id_ingredient = (
     -- Filtre sur l'ID de la potion 'Soupe' et l'ID de l'ingrédient 'Persil' (en ignorant la casse)
 );
 
+
+
+F. Obélix s'est trompé : ce sont 42 casques Weisenau, et non Ostrogoths, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
+
+UPDATE prendre_casque
+SET qte = 42,
+    id_casque = (
+        SELECT id_casque
+        FROM casque
+        WHERE LOWER(nom_casque) = 'weisenau'
+    )
+WHERE id_bataille = (
+	    SELECT id_bataille
+	    FROM bataille
+	    WHERE LOWER(nom_bataille) = 'attaque de la banque postale'
+);
