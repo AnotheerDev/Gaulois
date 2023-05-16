@@ -109,7 +109,7 @@ ORDER BY cout_realisation DESC;
 
 7. Nom des ingrédients + coût + quantité de chaque ingrédient qui composent la potion 'Santé'.
 
-SELECT ingredient.nom_ingredient, ingredient.cout_ingredient, composer.qte
+SELECT ingredient.nom_ingredient, ingredient.cout_ingredient, composer.qte, (ingredient.cout_ingredient * composer.qte) AS cout_total
 -- Sélectionne les ingrédients, le cout des ingrédients et la quantité
 FROM potion
 -- Sélectionne depuis la table "potion"
