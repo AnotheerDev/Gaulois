@@ -180,17 +180,23 @@ ORDER BY quantite_bue DESC;
 
 10. Nom de la bataille où le nombre de casques pris a été le plus important.
 
-SELECT bataille.nom_bataille, SUM(prendre_casque.qte) AS nombre_de_casques
--- Sélectionne le nom de la bataille , la somme des casques 
-FROM bataille
-INNER JOIN prendre_casque ON bataille.id_bataille = prendre_casque.id_bataille
--- Effectue une jointure avec la table "prendre_casque"
-GROUP BY bataille.id_bataille, bataille.nom_bataille
--- Regroupe les résultats par le ID de bataille et nom de bataille
-ORDER BY nombre_de_casques DESC
--- Trie les résultats par ordre décroissant des casques pris lors de la bataille
-LIMIT 1;
--- Garde que le premier resultat 
+SELECT
+    b.nom_bataille
+FROM
+    bataille b
+INNER JOIN
+    prendre_casque pc ON b.id_bataille = pc.id_bataille
+GROUP BY
+    b.id_bataille, b.nom_bataille
+HAVING
+    SUM(pc.qte) >= ALL(
+        SELECT
+            SUM(pc.qte)
+        FROM
+            prendre_casque pc
+        GROUP BY
+            pc.id_bataille
+    )
 
 
 
