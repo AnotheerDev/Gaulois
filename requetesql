@@ -56,7 +56,7 @@ INNER JOIN lieu ON personnage.id_lieu = lieu.id_lieu
 -- Effectue une jointure interne entre la table "personnage" et la table "lieu" en utilisant l'identifiant du lieu comme clé de jointure
 INNER JOIN specialite ON personnage.id_specialite = specialite.id_specialite
 -- Effectue une jointure interne entre la table "personnage" et la table "specialite" en utilisant l'identifiant de la spécialité comme clé de jointure
-ORDER BY lieu.id_lieu, personnage.nom_personnage;
+ORDER BY lieu.nom_lieu, personnage.nom_personnage;
 -- Trie les résultats par ordre croissant de l'identifiant du lieu, puis par ordre croissant du nom du personnage
 
 
@@ -265,5 +265,20 @@ WHERE id_personnage = (
   -- Filtre sur l'ID de Bonemine
 AND id_potion = 1;
 -- Filtre sur l'ID de la potion magique
+
+
+
+C. Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille.
+
+
+
+
+
+
+
+
+
+
+
 
 
