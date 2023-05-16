@@ -292,8 +292,11 @@ A. Ajoutez le personnage suivant : Champdeblix, agriculteur résidant à la ferm
 
 INSERT INTO personnage (nom_personnage, adresse_personnage, id_lieu, id_specialite)
 -- Ajoute un nouveau personnage à la table personnage à l'aide de INSERT INTO
-VALUES ('Champdeblix', 'ferme Hantassion', 6 , 12);
--- Ajoute les valeurs associées colonne par colonnne
+SELECT 'Champdeblix, 'ferme Hantassion', lieu.id_lieu, specialite.id_specialite
+FROM lieu
+INNER JOIN specialite ON LOWER(lieu.nom_lieu) = LOWER('Rotomagus') 
+		       AND LOWER(specialite.nom_specialite) = LOWER('Agriculteur');
+
 
 
 
