@@ -231,16 +231,30 @@ LIKE 'poisson frais'
 
 13. Nom du / des lieu(x) possédant le plus d'habitants, en dehors du village gaulois.
 
-SELECT lieu.nom_lieu, COUNT(personnage.nom_personnage) AS NombreDePersonnages
--- Sélectionne le nom du lieu, compte le nombre de personnage vivant dans le même lieu
-FROM lieu
-JOIN personnage ON lieu.id_lieu = personnage.id_lieu
--- Effectue une jointure avec la table "personnage"
-WHERE lieu.nom_lieu
-NOT LIKE LOWER('Village gaulois')
--- Effectue une recherche pour tous les lieux différents de village gaulois
-GROUP BY lieu.nom_lieu
-ORDER BY NombreDePersonnages DESC
+SELECT
+    lieu.nom_lieu
+FROM
+    lieu
+JOIN
+    personnage ON lieu.id_lieu = personnage.id_lieu
+WHERE
+    LOWER(lieu.nom_lieu) NOT LIKE LOWER('Village gaulois')
+GROUP BY
+    lieu.nom_lieu
+HAVING
+    COUNT(personnage.nom_personnage) >= ALL(
+        SELECT
+            COUNT(personnage.nom_personnage)
+        FROM
+            lieu
+        JOIN
+            personnage ON lieu.id_lieu = personnage.id_lieu
+        WHERE
+            LOWER(lieu.nom_lieu) NOT LIKE LOWER('Village gaulois')
+        GROUP BY
+            lieu.nom_lieu
+    );
+
 
 
 
