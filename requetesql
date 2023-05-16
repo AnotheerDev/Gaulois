@@ -305,12 +305,16 @@ B. Autorisez Bonemine à boire de la potion magique, elle est jalouse d'Iélosub
 DELETE FROM autoriser_boire
 -- DELETE FROM sert à supprimer l'enregistrement de la table autoriser_boire
 WHERE id_personnage = (
-	SELECT id_personnage 
-	FROM personnage 
-	WHERE LOWER(nom_personnage)
-	LIKE 'Bonemine')
-  -- Filtre sur l'ID de Bonemine
-AND id_potion = 1;
+SELECT id_personnage
+FROM personnage
+WHERE LOWER(nom_personnage) LIKE 'Bonemine'
+)
+-- Filtre sur l'ID de Bonemine
+AND id_potion = (
+SELECT id_potion
+FROM potion
+WHERE LOWER(nom_potion) LIKE 'potion magique'
+);
 -- Filtre sur l'ID de la potion magique
 
 
