@@ -124,19 +124,43 @@ WHERE potion.nom_potion = 'Santé';
 
 8. Nom du ou des personnages qui ont pris le plus de casques dans la bataille 'Bataille du village gaulois'.
 
-SELECT personnage.nom_personnage, SUM(prendre_casque.qte) AS nombre_de_casques
--- Sélectionne le nom du personnage et la somme des casques pris
-FROM personnage
-INNER JOIN prendre_casque ON personnage.id_personnage = prendre_casque.id_personnage
-INNER JOIN casque ON prendre_casque.id_casque = casque.id_casque
-INNER JOIN bataille ON prendre_casque.id_bataille = bataille.id_bataille
--- Jointure des tables pour lier les informations
-WHERE bataille.nom_bataille = 'Bataille du village gaulois'
--- Filtre pour obtenir seulement les informations de la "Bataille du village gaulois"
-GROUP BY personnage.id_personnage
--- Regroupe les résultats par le ID du personnage
-ORDER BY nombre_de_casques DESC
--- Trie les résultats par ordre décroissant du nombre de casques pris
+SELECT
+    p.nom_personnage,
+    -- Sélectionne le nom du personnage
+    SUM(pc.qte) AS nb_casques 
+    -- Calcule la somme des quantités de casques pour chaque personnage
+FROM
+    personnage p 
+    -- Table des personnages
+INNER JOIN
+    prendre_casque pc ON p.id_personnage = pc.id_personnage 
+    -- Jointure avec la table prendre_casque en utilisant l'identifiant du personnage
+INNER JOIN
+    bataille b ON pc.id_bataille = b.id_bataille 
+    -- Jointure avec la table bataille en utilisant l'identifiant de la bataille
+WHERE
+    b.nom_bataille = 'Bataille du village gaulois' 
+    -- Filtre les batailles avec le nom 'Bataille du village gaulois'
+GROUP BY
+    p.nom_personnage
+    -- Regroupe les résultats par nom de personnage
+HAVING
+    nb_casques >= ALL(
+        SELECT
+            SUM(pc.qte) 
+	    -- Calcule la somme des quantités de casques pour chaque personnage dans la sous-requête
+        FROM
+            prendre_casque pc
+        INNER JOIN
+            bataille b ON pc.id_bataille = b.id_bataille
+        WHERE
+            b.nom_bataille = 'Bataille du village gaulois'
+        GROUP BY
+            pc.id_personnage
+	    -- Sélectionne uniquement les personnages ayant le nombre de casques supérieur ou égal à tous les autres personnages
+    ); 
+
+
 
 
 
