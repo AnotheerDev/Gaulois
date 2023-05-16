@@ -321,7 +321,20 @@ WHERE LOWER(nom_potion) LIKE 'potion magique'
 
 C. Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille.
 
+DELETE FROM casque
+WHERE id_type_casque = (
+	 SELECT id_type_casque
+    FROM type_casque
+    WHERE LOWER(nom_type_casque) = 'grec'
+    -- Filtrer les casques du type "grec"
+)
+AND id_casque NOT IN  (
+	   SELECT id_casque
+    FROM prendre_casque
+    WHERE id_bataille IS NOT NULL
+    -- Filtrer les casques qui ont été pris lors d'une bataille
 
+);
 
 
 
