@@ -384,6 +384,3 @@ WHERE id_bataille = (
 	    WHERE LOWER(nom_bataille) = 'attaque de la banque postale'
 );*/
 
-UPDATE prendre_casque 
-SET id_casque='10'
-WHERE id_bataille='9'
